@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="style.css">
+        <title> DJ SNAKE </title>
+        <meta charset="utf-8">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.11.0/brython.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/brython@3.11.0/brython_stdlib.js"></script>
+    </head>
+    <body onload="brython()">
+        <p> Si vous êtes ici, vous aimez DJ snake </p>
+        <div style="display: flex; flex-wrap: wrap;">
+            <div style="width: 50%; margin-bottom: 0px;">
+                <button id="button1" src="DJbio.webp" alt="image1" style="width: 100%; height: auto;">
+            </div>
+            <div style="width: 50%; margin-bottom: 0px;">
+                <button id="button2" src="DJCD.jpg" alt="image1" style="width: 100%; height: auto;">
+            </div>
+            <div style="width: 50%; margin-bottom: 0px;">
+                <button id="button3" src="JSnake.jpg" alt="image1" style="width: 100%; height: auto;">
+            </div>
+            <div style="width: 50%; margin-bottom: 0px;">
+                <button id="button4" src="DJSnake.jpg" alt="image1" style="width: 100%; height: auto;">
+            </div>
+        </div>
+    
+        <script type="text/python">
+            def biographie(ev):
+                for i in range(1, 5):
+                    document[f"button{i}_container"].style.display = "none"
+                print("Tous les boutons ont été supprimés.")
+
+           document["button1"].bind("click", biographie)
+           document["button2"].bind("click", discographie)
+           document["button3"].bind("click", jeux)
+           document["button4"].bind("click", billeterie)
+        </script>
+    </body>
