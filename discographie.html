@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title>Dj snake</title>
+        <title>Dj snake - Discographie</title>
         <style>
             body {
-                font-family: 'Noto Sans TC', sans-serif;
+                font-family: 'Playfair Display', sans-serif;
                 background-color: black;
             }
 
@@ -25,13 +25,27 @@
                 
                 margin-left: 20px;
             }
+            .back-to-top {
+                position: fixed;
+                top: 20px; /* Ajuster la position en haut */
+                right: 20px;
+                background-color: white;
+                color: black;
+                border: none;
+                border-radius: 4px;
+                padding: 10px 20px;
+                font-size: 16px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            .back-to-top:hover {
+                background-color: #acacac;
+            }
         </style>
     </head>
 
     <body>
-
-        <button>Retour</button>
-        
         <header>
             <h1>Discographie :</h1>
         </header>
@@ -260,6 +274,7 @@
             </br>
                 
         </section>
+        <button class="back-to-top" onclick="window.location.href='1er%20essai.html'">Retour</button>
     </body>
   
 </html>
