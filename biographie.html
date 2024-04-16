@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ Snake - Biographie</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Playfair Display', serif;
+            background-color: #000000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #000000;
+            padding: 20px 0;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 32px;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        img {
+            width: 100%;
+            max-width: 1000px;
+            display: block;
+            margin: 0 auto;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .button-container button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-container button:hover {
+            background-color: #acacac;
+        }
+
+        .text-display {
+            margin-top: 20px;
+            text-align: center; /* Centrer le texte */
+        }
+
+        .text-display p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        /* Bouton "Retour en haut à droite" */
+        .back-to-top {
+            position: fixed;
+            top: 20px; /* Ajuster la position en haut */
+            right: 20px;
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            background-color: #acacac;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Biographie</h1>
+    </header>
+    <div class="container">
+        <img src="DJbio.png" alt="DJ Snake">
+        <div class="button-container">
+            <button onclick="displayText('Enfance')">Enfance</button>
+            <button onclick="displayText('Célébrité')">Célébrité</button>
+            <button onclick="displayText('Palmarès')">Palmarès</button>
+        </div>
+        <div id="text-display" class="text-display"></div>
+    </div>
+
+    <!-- Bouton "Retour en haut à droite" -->
+    <button class="back-to-top" onclick="window.location.href='1er%20essai.html'">Retour</button>
+
+    <script>
+        function displayText(text) {
+            var textDisplay = document.getElementById("text-display");
+            if (text === "Enfance") {
+                textDisplay.innerHTML = "<p>William Sami Étienne Grigahcine, connu comme DJ Snake, naît à Paris le 13 juin 1986. Il passe son enfance à Ermont avant de déménager dans le Val-d'Oise. Il n'a que 14 ans lorsqu'il se découvre une passion pour le mixe. La séquence du DJ Curt Kille dans le film culte La Haine est pour lui une révélation. DJ Snake commence sa carrière en se produisant dans des clubs, notamment Les Bains Douches à Paris. Il choisit son nom d'artiste en hommage à son pseudonyme de street artiste parisien.</p>";
+            } else if (text === "Célébrité") {
+                textDisplay.innerHTML = "<p>Très rapidement, il se fait remarquer. Après avoir été nommé aux Grammy Awards en 2012 pour sa participation en tant que producteur à l’album « Born This Way » de Lady Gaga, DJ Snake est invité par la superstar Diplo à mixer dans son émission en Angleterre. Il a notamment travaillé avec Lady Gaga et s’est fait connaître du grand public par le clip « Turn Down For What », sorti en 2013. En 2015, il récidive avec « Lean On », qui devient le hit de l’été. Sur sa lancée, DJ Snake livre ensuite « Middle » suivi de « Talk » en featuring avec George Maple, puis « Let Me Love You » avec Justin Bieber. Fin juin 2016, DJ Snake annonce la sortie de son premier album solo, prévu pour l’été. Au mois de juillet, il communique la date de sortie de « Encore », le 5 août, et dévoile sa pochette. Le 4 août à minuit sort son hit avec Justin Bieber « Let Me Love You ». C’est un carton immédiat : la lyric vidéo est visionnée par près de 4 millions d’internautes en seulement quelques jours. « Encore » sort le lendemain. On y retrouve des featurings avec Skrillex, Young Thug, Jeremih ou encore Travis Scott. Le 24 février 2018, DJ Snake s'offre une date à l'AccorHotels Arena de Paris. DJ Snake est aussi connu pour ses talentueux remix. Il s’attaque notamment à des hits de Kanye West, Major Lazer ou encore Duck Sauce! En février 2020, DJ Snake fait danser plus de 40 000 personnes lors d'un show unique à la Paris la Défense Arena. Le musicien n’hésite pas à se mettre en scène sur une passerelle, en hauteur mais aussi devant un décor gigantesque de l’Arc de Triomphe. Il offre à ses fans la diffusion de ce concert gigantesque, au cinéma, à la fin du mois d'août.</p>";
+            } else if (text === "Palmarès") {
+                textDisplay.innerHTML = "<p>DJ snake fut nominé deux fois pour le Grammy Awards malheureusement il ne recevra pas de récompense. De même pour le iHeartRadio Music Awards et le Kids' Choice Awards il ne recevra pas de titres malgré ses deux et une nominations. Il obtiendra notamment deux titres du Billboard Music Awards sur ses quatre nominations. De plus, il reçu un MTV Video Music Awards en trois nominations. Pour finir, il gagna bon nombre d'awards NRJ, deux NRJ Music Awards et trois NRJ DJ Awards.</p>";
+            }
+        }
+    </script>
+</body>
+</html>
+
