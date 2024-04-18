@@ -28,22 +28,23 @@
         canvas {
             border: 1px solid #000;
             background-color: #fff;
-            display: none; /* Cachez le canvas par défaut */
+            display: none;
         }
         #restartButton {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            display: none; /* Cachez le bouton de recommencer par défaut */
-            background-color: #ffffff;
-            color: #000000;
+            display: none; 
+            background-color: #000000;
+            color: #ffffff;
             border: none;
             border-radius: 4px;
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            width: 200px;
         }
         #restartButton:hover {
             background-color: #acacac;
@@ -65,6 +66,11 @@
             .back-to-top:hover {
                 background-color: #acacac;
             }
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -90,15 +96,7 @@
         let gameInterval;
         let restartButton = document.getElementById('restartButton');
 
-        document.getElementById('startButton').addEventListener('click', () => {
-            canvas.style.display = 'block';
-            document.getElementById('startButton').style.display = 'none';
-
-            snake = new Snake();
-            fruit = new Fruit();
-            fruit.pickLocation();
-
-            function gameLoop() {
+        function gameLoop() {
                 gameInterval = setInterval(() => {
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
                     fruit.draw();
@@ -112,6 +110,14 @@
                     snake.checkCollision();
                 }, 100); 
             }
+
+        document.getElementById('startButton').addEventListener('click', () => {
+            canvas.style.display = 'block';
+            document.getElementById('startButton').style.display = 'none';
+
+            snake = new Snake();
+            fruit = new Fruit();
+            fruit.pickLocation();
 
             window.addEventListener('keydown', (evt) => {
                 const direction = evt.key.replace('Arrow', '');
@@ -249,11 +255,10 @@
         }
         restartButton.addEventListener('click', () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-
             snake = new Snake();
             fruit = new Fruit();
             fruit.pickLocation();
-
+            clearInterval(gameInterval);
             gameLoop();
         });
     </script>
