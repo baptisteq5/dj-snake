@@ -67,7 +67,21 @@
                 transition: background-color 0.3s ease;
             }
     
-            button:hover {
+            .back-to-top {
+            position: fixed;
+            top: 20px; 
+            right: 20px;
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            }
+
+            .back-to-top:hover {
                 background-color: #acacac;
             }
         </style>
@@ -75,12 +89,10 @@
 
     <body>
 
-        <button>Retour</button>
-
         <header>
             <h1>Prochaines dates :</h1>
         </header>
-
+        <button class="back-to-top" onclick="window.location.href='1er%20essai.html'">Retour</button>
         <section>
 
             <table>
