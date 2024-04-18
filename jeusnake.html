@@ -6,32 +6,59 @@
     <title>Snake Game</title>
     <style>
         body {
-            background-color: black; /* Mise à jour de la couleur de fond en noir */
+            background-color: rgb(0, 0, 0); 
+            color: #fff;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
             margin: 0;
+            position: relative;
+            text-align: center;
         }
         #startButton {
             padding: 10px 20px;
             font-size: 16px;
-            background-color: #007bff;
-            color: white;
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
             border: none;
             cursor: pointer;
         }
         canvas {
             border: 1px solid #000;
             background-color: #fff;
+            display: none; /* Cachez le canvas par défaut */
+        }
+        #restartButton {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none; /* Cachez le bouton de recommencer par défaut */
+            background-color: #ffffff;
+            color: #000000;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #restartButton:hover {
+            background-color: #acacac;
         }
     </style>
 </head>
 <body>
-    <h1>Bonjour</h1> <!-- Texte "Bonjour" en haut de la page -->
-    <button id="startButton">Commencer le jeu</button> <!-- Bouton pour démarrer le jeu -->
+    <h1>Bonjour cher fan de DJ Snake si vous êtes là c'est pour vous amuser. Recupérez tous vos disques d'or en vous dirigeant avec les flèches. Bonne chance apprenti DJ</h1>
+    <button id="startButton">Commencer le jeu</button>
 
     <canvas id="gameCanvas" width="400" height="400"></canvas>
+
+    <button id="restartButton" class="back-to-top">Recommencer</button>
+
+    <button class="back-to-top" onclick="window.location.href='1er%20essai.html'">Retour</button>
 
     <script>
         const canvas = document.getElementById('gameCanvas');
@@ -43,30 +70,47 @@
 
         let snake;
         let fruit;
+        let gameInterval;
+        let restartButton = document.getElementById('restartButton');
 
-        (function setup() {
+        document.getElementById('startButton').addEventListener('click', () => {
+            canvas.style.display = 'block';
+            document.getElementById('startButton').style.display = 'none';
+
             snake = new Snake();
             fruit = new Fruit();
             fruit.pickLocation();
 
-            window.setInterval(() => {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                fruit.draw();
-                snake.update();
-                snake.draw();
+            function gameLoop() {
+                gameInterval = setInterval(() => {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    fruit.draw();
+                    snake.update();
+                    snake.draw();
 
-                if (snake.eat(fruit)) {
-                    fruit.pickLocation();
-                }
+                    if (snake.eat(fruit)) {
+                        fruit.pickLocation();
+                    }
 
-                snake.checkCollision();
-                document.querySelector('.score').innerText = snake.total;
-            }, 100); // Mise à jour de l'intervalle de rafraîchissement
-        }());
+                    snake.checkCollision();
+                }, 100); 
+            }
 
-        window.addEventListener('keydown', (evt) => {
-            const direction = evt.key.replace('Arrow', '');
-            snake.changeDirection(direction);
+            window.addEventListener('keydown', (evt) => {
+                const direction = evt.key.replace('Arrow', '');
+                snake.changeDirection(direction);
+            });
+
+            gameLoop();
+        });
+
+        restartButton.addEventListener('click', () => {
+            restartButton.style.display = 'none';
+            snake = new Snake();
+            fruit = new Fruit();
+            fruit.pickLocation();
+            clearInterval(gameInterval);
+            gameLoop(); // Relancer le jeu après le clic sur le bouton "Recommencer"
         });
 
         function Snake() {
@@ -79,11 +123,11 @@
 
             this.draw = function() {
                 const img = new Image();
-                img.src = 'DJbio.png'; // Insérez le chemin de votre image de tête de serpent ici
+                img.src = 'tetesnake.jpg'; 
                 ctx.drawImage(img, this.x, this.y, scale, scale);
 
                 for (let i = 0; i < this.tail.length; i++) {
-                    ctx.fillStyle = 'black'; // Mise à jour de la couleur de remplissage en noir
+                    ctx.fillStyle = 'black'; 
                     ctx.fillRect(this.tail[i].x, this.tail[i].y, scale, scale);
                 }
             };
@@ -112,6 +156,14 @@
 
                 if (this.y < 0) {
                     this.y = canvas.height - scale;
+                }
+
+                // Vérifier si le serpent se mord la queue
+                for (let i = 0; i < this.tail.length; i++) {
+                    if (this.x === this.tail[i].x && this.y === this.tail[i].y) {
+                        clearInterval(gameInterval);
+                        restartButton.style.display = 'block';
+                    }
                 }
             };
 
@@ -153,10 +205,14 @@
             };
 
             this.checkCollision = function() {
-                for (let i = 0; i < this.tail.length; i++) {
-                    if (this.x === this.tail[i].x && this.y === this.tail[i].y) {
-                        this.total = 0;
-                        this.tail = [];
+                // Vérifier la collision avec le corps du serpent uniquement si sa taille est supérieure à 1
+                if (this.total > 1) {
+                    for (let i = 0; i < this.tail.length - 1; i++) {
+                        // Vérifier si la tête du serpent entre en collision avec une partie de son corps
+                        if (this.x === this.tail[i].x && this.y === this.tail[i].y) {
+                            clearInterval(gameInterval);
+                            restartButton.style.display = 'block';
+                        }
                     }
                 }
             };
@@ -173,14 +229,10 @@
 
             this.draw = function() {
                 const img = new Image();
-                img.src = 'disque_d_or.jpg'; // Insérez le chemin de votre image de fruit ici
+                img.src = 'disque_d_or.jpg'; 
                 ctx.drawImage(img, this.x, this.y, scale, scale);
             };
         }
-        startButton.addEventListener('click', () => {
-            startButton.style.display = 'none'; // Cacher le bouton au démarrage du jeu
-            gameCanvas.style.display = 'block'; // Afficher le canvas du jeu
-        });
     </script>
 </body>
 </html>
